@@ -112,6 +112,7 @@ if args.raw:
 print(fmtTitle.format("=== M E N Ü P L A N ==="))
 print(fmtTitle.format(mensaLongName))
 print(fmtTitle.format(dateFilter))
+print("")
 
 # print meals
 rx = re.compile(r" \[.+?\]", re.IGNORECASE)
