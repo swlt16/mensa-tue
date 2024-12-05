@@ -6,6 +6,7 @@ import shutil
 import configparser
 import argparse
 import datetime
+import re
 
 # for the future me:
 # todo: please implement --save-default 
@@ -27,7 +28,8 @@ menuComponents = {
     "g": "\033[33mGeflügel\033[00m",
     "s": "\033[91mSchwein\033[00m",
     "r": "\033[31mRind\033[00m",
-    "f": "\033[36mFisch\033[00m"
+    "f": "\033[36mFisch\033[00m",
+    "so": "\033[37mSoja\033[00m",
 }
 
 
@@ -112,13 +114,18 @@ print(fmtTitle.format(mensaLongName))
 print(fmtTitle.format(dateFilter))
 
 # print meals
+rx = re.compile(r" \[.+?\]", re.IGNORECASE)
 for menu in menus:
+    # meal components
     components = []
     for component in menu["icons"]:
         try:
             components.append(menuComponents[component.lower()])
         except KeyError:
             components.append(component.lower())
+    # remove components from menu line
+    menu["menu"] = list(map(lambda entry: rx.sub("", entry), menu["menu"]))
+    # output menu line
     if len(menu["menu"]) == 0:
         menuLine = menu["menuLine"]
     else:
