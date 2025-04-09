@@ -7,11 +7,7 @@ import configparser
 import argparse
 import datetime
 import re
-
-# for the future me:
-# todo: please implement --save-default 
-# and push this shit on github!
-
+from pathlib import Path
 
 # static data
 mensas = [
@@ -56,7 +52,7 @@ fmtTitle = "{:^%ds}" % (termCols)
 
 # settings
 baseUrl = 'https://www.my-stuwe.de/wp-json/mealplans/v1/canteens/%(mensaId)s?lang=de'
-rcFile = "/Users/sebastian/.mensarc"
+rcFile = Path.home() / ".mensarc"
 config = configparser.ConfigParser()
 config.read(rcFile)
 
