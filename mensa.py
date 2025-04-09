@@ -36,6 +36,7 @@ parser.add_argument("-m", "--mensa", default="-1", help="id or shortname of chos
 parser.add_argument("-d", "--date", default="0", help="date offset in days from today to display, e.g. +1 is tomorrow", type=int)
 parser.add_argument("--save-default", help="save current settings as default settings in .mensarc", action="store_true")
 parser.add_argument("--raw", help="output json array instead of nice human readable text", action="store_true")
+parser.add_argument("--signal", help="output signal compatible text", action="store_true")
 args = parser.parse_args()
 
 # list available mensas and exit if --list-mensas was called
@@ -102,6 +103,34 @@ menus = list(filter(lambda menu: (menu["menuDate"] == dateFilter), menus))
 if args.raw:
     # raw json output
     print(menus)
+    quit()
+
+if args.signal:
+    print("📍 " + mensaLongName)
+    print("📅 " + dateFilter)
+    print("")
+    # print meals
+    rx = re.compile(r" \[.+?\]", re.IGNORECASE)
+    for menu in menus:
+        # meal components
+        components = []
+        for component in menu["icons"]:
+            try:
+                components.append(menuComponents[component.lower()])
+            except KeyError:
+                components.append(component.lower())
+        # remove components from menu line
+        menu["menu"] = list(map(lambda entry: rx.sub("", entry), menu["menu"]))
+        # output menu line
+        if len(menu["menu"]) == 0:
+            menuLine = menu["menuLine"]
+        else:
+            menuLine = ", ".join(menu["menu"])
+
+        print("🧑‍🍳 " + menuLine)
+        print("💰 " + menu["studentPrice"])
+        print("🚨 " + " ".join(components))
+        print("")
     quit()
 
 # normal (nice) output
