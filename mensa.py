@@ -105,10 +105,21 @@ if args.raw:
     print(menus)
     quit()
 
+# code for signal bot
 if args.signal:
     print("📍 " + mensaLongName)
     print("📅 " + dateFilter)
     print("")
+    # override menuComponents
+    menuComponents = {
+        "vegan": "🌿",
+        "v": "🥦",
+        "g": "🐓",
+        "s": "🐖",
+        "r": "🐄",
+        "f": "🐟",
+        "so": "🫘",
+    }
     # print meals
     rx = re.compile(r" \[.+?\]", re.IGNORECASE)
     for menu in menus:
@@ -128,8 +139,8 @@ if args.signal:
             menuLine = ", ".join(menu["menu"])
 
         print("🧑‍🍳 " + menuLine)
-        print("💰 " + menu["studentPrice"])
-        print("🚨 " + " ".join(components))
+        print("💰 " + menu["studentPrice"] + "€")
+        if len(components): print("🚨 " + " ".join(components))
         print("")
     quit()
 
