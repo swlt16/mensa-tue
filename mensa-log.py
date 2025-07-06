@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS meals (
 def fetch_cli_data(offset: int):
     """Calls the CLI with day offset and returns parsed JSON list"""
     result = subprocess.run(
-        ["python", "mensa.py", "--raw", "-d", f"+{offset}"],
+        ["python", "./mensa.py", "--raw", "-d", f"+{offset}"],
         capture_output=True,
         text=True,
         check=True
