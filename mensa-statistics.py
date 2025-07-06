@@ -1,7 +1,7 @@
 import duckdb
 from datetime import date
 
-con = duckdb.connect("mensa.duckdb")
+con = duckdb.connect("./mensa.duckdb")
 
 # Dein Ziel-Datum
 menu_date = date(2025, 7, 8)

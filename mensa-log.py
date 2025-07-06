@@ -3,7 +3,7 @@ import subprocess
 import json
 from datetime import datetime
 
-con = duckdb.connect("mensa.duckdb")
+con = duckdb.connect("./mensa.duckdb")
 
 con.execute("""
 CREATE TABLE IF NOT EXISTS meals (
