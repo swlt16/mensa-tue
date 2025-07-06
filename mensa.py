@@ -102,7 +102,7 @@ menus = list(filter(lambda menu: (menu["menuDate"] == dateFilter), menus))
 
 if args.raw:
     # raw json output
-    print(menus)
+    print(json.dumps(menus))
     quit()
 
 # code for signal bot
