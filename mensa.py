@@ -99,6 +99,7 @@ mensaInfo = json.loads(rawJson)
 # filter by date
 menus = mensaInfo[str(mensaId)]["menus"]
 menus = list(filter(lambda menu: (menu["menuDate"] == dateFilter), menus))
+menus = list(filter(lambda menu: (menu["menuLine"] not in ["Beilagen vorport.", "Salat-/ Gemüsebuffet 100g", "Dessert vorport."]), menus))
 
 if args.raw:
     # raw json output
