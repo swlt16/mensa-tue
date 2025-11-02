@@ -1,6 +1,11 @@
+#!/usr/bin/python3
+
 from google import genai
+import sys
 
 client = genai.Client(api_key="")
+
+input = sys.stdin.read()
 
 response = client.models.generate_content(
     model="gemini-2.5-flash",
@@ -27,39 +32,8 @@ response = client.models.generate_content(
     Halte dich insgesamt aber bitte kurz und bläh die Nachricht nicht zu sehr auf.
     Und verändere den SINN der Original-Nachricht nicht. 
     Du bekommst jetzt die Original-Nachricht, und gibst die modifizierte Nachricht zurück: 
-    
-📍 Mensa Wilhelmsstraße
-📅 2025-10-27
 
-🧑‍🍳 Buntes Pfannengemüse, Aioli, Countrykartoffeln, Blattsalat
-💰 3,70€
-🚨 🌿
-
-🧑‍🍳 Hähnchenbrustfilet natur, Tomatensahnesoße, Erbsengemüse, Tagliatelle
-💰 3,70€
-🚨 🐓
-
-🧑‍🍳 Nasi Goreng mit Sojastreifen, Blattsalat
-💰 4,45€
-🚨 🌿
-
-🧑‍🍳 Rinderhack-Weißkrautkraut Auflauf, Kartoffelstampf
-💰 5,10€
-🚨 🐄
-
-📍 Cafeteria Wilhelmsstraße
-📅 2025-10-27
-
-🧑‍🍳 Brokkoli-Sojageschnetzeltes, Reis
-💰 4,60€
-🚨 🌿
-
-🧑‍🍳 Pizza Salami, Pizza "Quattro Formaggi" Pizza Vier-Käse
-💰 7,00€
-
-🧑‍🍳 Hausgemachte Pasta, Champignons in Rahm oder, Aglio e Olio
-💰 5,20€
-""",
+""" + input,
 )
 
 print(response.text)
