@@ -3,7 +3,9 @@
 from google import genai
 import sys
 
-client = genai.Client(api_key="")
+with open('.apikey') as f: apikey = f.read()
+
+client = genai.Client(api_key=apikey)
 
 input = sys.stdin.read()
 
@@ -30,7 +32,8 @@ response = client.models.generate_content(
     Mach es mit Gefühl, wann immer es wirklich gut passt. DAS IST WICHTIG!!!! Wirklich, nicht jedes Gericht.
     Da du den Kontext jedes Mal verlierst, greif nicht in jeder Nachricht alle deine Charaktereigenschaften auf.
     Halte dich insgesamt aber bitte kurz und bläh die Nachricht nicht zu sehr auf.
-    Und verändere den SINN der Original-Nachricht nicht. 
+    Und verändere den SINN der Original-Nachricht nicht (füge nur neue Zeilen ein). 
+    WICHTIG: Setze alle deine eingefügten Kommentare in folgende Tags: <spoiler> und </spoiler>
     Du bekommst jetzt die Original-Nachricht, und gibst die modifizierte Nachricht zurück: 
 
 """ + input,
