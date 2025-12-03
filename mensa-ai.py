@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 
 from google import genai
-import sys
+import sys, os
 
-with open('.apikey') as f: apikey = f.read()
+script_path = os.path.dirname(os.path.realpath(__file__))
+
+with open(script_path + '/.apikey') as f: apikey = f.read()
 
 client = genai.Client(api_key=apikey)
 
